@@ -4,19 +4,19 @@
 <p>{{ project.short_description }}</p>
 
 {% if project.github_url %}
-  <p><a href="{{ project.github_url }}" target="_blank" rel="noreferrer">View on GitHub</a></p>
+  <p><strong>GitHub:</strong> <a href="{{ project.github_url }}" target="_blank" rel="noreferrer">{{ project.github_url }}</a></p>
 {% endif %}
 
 {% if project.demo_url %}
-  <p><a href="{{ project.demo_url }}" target="_blank" rel="noreferrer">Live Demo</a></p>
+  <p><strong>Live Demo:</strong> <a href="{{ project.demo_url }}" target="_blank" rel="noreferrer">{{ project.demo_url }}</a></p>
 {% endif %}
 
 {% if project.technologies.all %}
   <h3>Technologies</h3>
   <ul>
-    {% for tech in project.technologies.all %}
-      <li>{{ tech.name }}</li>
-    {% endfor %}
+  {% for tech in project.technologies.all %}
+    <li>{{ tech.name }}</li>
+  {% endfor %}
   </ul>
 {% endif %}
 
@@ -34,5 +34,5 @@
   <p>{{ project.lessons_learned }}</p>
 {% endif %}
 
-<p><a href="{% url 'portfolio' %}">← Back to Projects</a></p>
+<p><a href="{% url 'portfolio' %}">Back to Projects</a></p>
 {% endblock %}
