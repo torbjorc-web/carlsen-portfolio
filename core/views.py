@@ -1,22 +1,35 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db import OperationalError, ProgrammingError
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ContactForm
-from .models import ContactMessage, LoginActivity
+
 from learning.models import LearningCredential
 from portfolio.models import Project
 
+from .forms import ContactForm
+from .models import ContactMessage, LoginActivity
+
 
 def home(request):
-    latest_projects = Project.objects.filter(status='published').order_by('-published_at', '-id')[:3]
-    latest_credentials = LearningCredential.objects.order_by('-completed_at', '-id')[:3]
+    try:
+        latest_projects = list(
+            Project.objects.filter(status='published').order_by('-published_at', '-id')[:3]
+        )
+        latest_credentials = list(
+            LearningCredential.objects.order_by('-completed_at', '-id')[:3]
+        )
+    except (OperationalError, ProgrammingError):
+        latest_projects = []
+        latest_credentials = []
 
     return render(request, 'core/home.html', {
         'latest_projects': latest_projects,
         'latest_credentials': latest_credentials,
     })
 
+
 def about(request):
     return render(request, 'core/about.html')
+
 
 def contact(request):
     selected_service_title = None
@@ -40,14 +53,22 @@ def contact(request):
         'selected_service_title': selected_service_title,
     })
 
+
 @login_required
 @user_passes_test(lambda user: user.is_staff)
 def dashboard(request):
-    messages = ContactMessage.objects.order_by('-created_at')[:50]
-    message_count = ContactMessage.objects.count()
-    unread_count = ContactMessage.objects.filter(is_read=False).count()
-    login_activities = LoginActivity.objects.select_related('user')[:15]
-    unique_login_users = LoginActivity.objects.values('user').distinct().count()
+    try:
+        messages = ContactMessage.objects.order_by('-created_at')[:50]
+        message_count = ContactMessage.objects.count()
+        unread_count = ContactMessage.objects.filter(is_read=False).count()
+        login_activities = LoginActivity.objects.select_related('user')[:15]
+        unique_login_users = LoginActivity.objects.values('user').distinct().count()
+    except (OperationalError, ProgrammingError):
+        messages = []
+        message_count = 0
+        unread_count = 0
+        login_activities = []
+        unique_login_users = 0
 
     return render(request, 'dashboard.html', {
         'messages': messages,
@@ -56,6 +77,7 @@ def dashboard(request):
         'login_activities': login_activities,
         'unique_login_users': unique_login_users,
     })
+
 
 @login_required
 @user_passes_test(lambda user: user.is_staff)

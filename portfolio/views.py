@@ -4,16 +4,19 @@ import urllib.request
 from datetime import datetime
 from functools import lru_cache
 
-from django.shortcuts import render, get_object_or_404
+from django.db import OperationalError, ProgrammingError
+from django.shortcuts import get_object_or_404, render
+
 from .models import Project
 
 GITHUB_USER = 'torbjorc-web'
 GITHUB_REPOS_URL = f'https://api.github.com/users/{GITHUB_USER}/repos?sort=updated&per_page=12&type=public'
 
+
 @lru_cache(maxsize=1)
 def fetch_github_repos():
     headers = {
-        'User-Agent': 'Torbjørn-Carlsen-Portfolio',
+        'User-Agent': 'Torbjorn-Carlsen-Portfolio',
         'Accept': 'application/vnd.github.v3+json',
     }
     request = urllib.request.Request(GITHUB_REPOS_URL, headers=headers)
@@ -45,7 +48,13 @@ def fetch_github_repos():
 
 
 def project_list(request):
-    projects = Project.objects.filter(status='published').order_by('-is_featured', '-published_at')
+    try:
+        projects = list(
+            Project.objects.filter(status='published').order_by('-is_featured', '-published_at')
+        )
+    except (OperationalError, ProgrammingError):
+        projects = []
+
     github_repos = fetch_github_repos()
     return render(request, 'portfolio/project_list.html', {
         'projects': projects,
