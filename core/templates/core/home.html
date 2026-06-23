@@ -72,7 +72,11 @@
         <article class="card home-feed-card">
           <h3>{{ project.title }}</h3>
           <p>{{ project.short_description|truncatechars:140 }}</p>
-          <a class="text-btn" href="{% url 'project_detail' project.slug %}">{% trans "Read more" %}</a>
+          {% if project.slug %}
+            <a class="text-btn" href="{% url 'project_detail' project.slug %}">{% trans "Read more" %}</a>
+          {% else %}
+            <span class="home-feed-meta">{% trans "Details coming soon" %}</span>
+          {% endif %}
         </article>
       {% endfor %}
     </div>
@@ -111,3 +115,4 @@
   {% endif %}
 </section>
 {% endblock %}
+
