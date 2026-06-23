@@ -56,4 +56,58 @@
     </div>
   </div>
 </section>
+
+<section class="container home-section">
+  <div class="section-header home-feed-header">
+    <div>
+      <span class="eyebrow">{% trans "Latest Work" %}</span>
+      <h2>{% trans "Newest published projects" %}</h2>
+    </div>
+    <a class="text-btn" href="{% url 'project_list' %}">{% trans "See all projects" %}</a>
+  </div>
+
+  {% if latest_projects %}
+    <div class="grid cols-3">
+      {% for project in latest_projects %}
+        <article class="card home-feed-card">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.short_description|truncatechars:140 }}</p>
+          <a class="text-btn" href="{% url 'project_detail' project.slug %}">{% trans "Read more" %}</a>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card home-feed-empty">
+      <p>{% trans "No published projects yet. New case studies will appear here automatically." %}</p>
+    </div>
+  {% endif %}
+</section>
+
+<section class="container home-section">
+  <div class="section-header home-feed-header">
+    <div>
+      <span class="eyebrow">{% trans "Learning" %}</span>
+      <h2>{% trans "Latest course certificates" %}</h2>
+    </div>
+    <a class="text-btn" href="{% url 'learning_list' %}">{% trans "See all learning" %}</a>
+  </div>
+
+  {% if latest_credentials %}
+    <div class="grid cols-3">
+      {% for credential in latest_credentials %}
+        <article class="card home-feed-card">
+          <h3>{{ credential.title }}</h3>
+          <p>{{ credential.summary|default:credential.provider|truncatechars:140 }}</p>
+          {% if credential.completed_at %}
+            <p class="home-feed-meta">{% trans "Completed" %}: {{ credential.completed_at|date:'M Y' }}</p>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card home-feed-empty">
+      <p>{% trans "No course certificates yet. This section updates automatically when new entries are added." %}</p>
+    </div>
+  {% endif %}
+</section>
 {% endblock %}

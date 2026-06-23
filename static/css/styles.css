@@ -154,6 +154,31 @@ a { color: inherit; text-decoration: none; }
   gap: 0.75rem;
   margin-top: 1.25rem;
 }
+
+.home-feed-header {
+  margin-bottom: 1rem;
+}
+
+.home-feed-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.55rem;
+}
+
+.home-feed-card p {
+  color: var(--muted);
+  margin: 0 0 0.9rem;
+}
+
+.home-feed-meta {
+  color: #bae6fd;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.home-feed-empty p {
+  margin: 0;
+  color: var(--muted);
+}
 .hero-copy {
   max-width: 46rem;
 }

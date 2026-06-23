@@ -2,10 +2,18 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ContactForm
 from .models import ContactMessage, LoginActivity
+from learning.models import LearningCredential
+from portfolio.models import Project
 
 
 def home(request):
-    return render(request, 'core/home.html')
+    latest_projects = Project.objects.filter(status='published').order_by('-published_at', '-id')[:3]
+    latest_credentials = LearningCredential.objects.order_by('-completed_at', '-id')[:3]
+
+    return render(request, 'core/home.html', {
+        'latest_projects': latest_projects,
+        'latest_credentials': latest_credentials,
+    })
 
 def about(request):
     return render(request, 'core/about.html')
