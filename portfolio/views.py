@@ -63,10 +63,5 @@ def project_list(request):
 
 
 def project_detail(request, slug):
-    try:
-        project = get_object_or_404(Project, slug=slug, status='published')
-        return render(request, 'portfolio/project_detail.html', {'project': project})
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        raise
+    from django.http import HttpResponse
+    return HttpResponse(f"<h1>Project: {slug}</h1><p>This is a test response</p>")
