@@ -63,6 +63,20 @@
               {% if credential.summary %}
                 <p>{{ credential.summary }}</p>
               {% endif %}
+              {% if credential.skill_areas.all %}
+                <div class="skill-areas-inline">
+                  {% for area in credential.skill_areas.all %}
+                    <span class="skill-area-tag">{{ area.name }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+              {% if credential.certificate_file %}
+                <p class="certificate-link">
+                  <a href="{{ credential.certificate_file.url }}" target="_blank" rel="noreferrer" class="btn btn-small">
+                    📄 View Certificate
+                  </a>
+                </p>
+              {% endif %}
             </div>
           </article>
         {% endfor %}

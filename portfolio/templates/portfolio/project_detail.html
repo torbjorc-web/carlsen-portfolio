@@ -1,11 +1,93 @@
 {% extends 'base.html' %}
+{% block title %}{{ project.title }} | Torbjørn Carlsen{% endblock %}
 {% block content %}
-<h1>{{ project.title }}</h1>
-<p>{{ project.short_description }}</p>
-<h2>Problem</h2>
-<p>{{ project.problem }}</p>
-<h2>Solution</h2>
-<p>{{ project.solution }}</p>
-<h2>Outcome</h2>
-<p>{{ project.outcome }}</p>
+<article class="project-detail">
+  <header class="project-header">
+    <h1>{{ project.title }}</h1>
+    {% if project.client_type %}
+      <p class="project-type">{{ project.client_type }}</p>
+    {% endif %}
+    {% if project.published_at %}
+      <p class="project-date">Published {{ project.published_at|date:"F Y" }}</p>
+    {% endif %}
+  </header>
+
+  {% if project.cover_image %}
+    <figure class="project-cover-figure">
+      <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" class="project-cover-image">
+    </figure>
+  {% endif %}
+
+  <section class="project-overview">
+    <p class="project-intro">{{ project.short_description }}</p>
+  </section>
+
+  <div class="project-links">
+    {% if project.github_url %}
+      <a href="{{ project.github_url }}" target="_blank" rel="noreferrer" class="btn btn-primary">
+        <span>View on GitHub</span>
+      </a>
+    {% endif %}
+    {% if project.demo_url %}
+      <a href="{{ project.demo_url }}" target="_blank" rel="noreferrer" class="btn btn-secondary">
+        <span>Live Demo</span>
+      </a>
+    {% endif %}
+  </div>
+
+  {% if project.technologies.all %}
+    <section class="project-tech">
+      <h3>Technologies Used</h3>
+      <div class="tech-list">
+        {% for tech in project.technologies.all %}
+          <span class="tech-tag">{{ tech.name }}</span>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% if project.context or project.problem %}
+    <section class="project-section">
+      <h2>Context & Challenge</h2>
+      {% if project.context %}
+        <div class="section-content">{{ project.context }}</div>
+      {% endif %}
+      {% if project.problem %}
+        <div class="section-content">{{ project.problem }}</div>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  {% if project.goal %}
+    <section class="project-section">
+      <h2>Goal</h2>
+      <div class="section-content">{{ project.goal }}</div>
+    </section>
+  {% endif %}
+
+  {% if project.solution %}
+    <section class="project-section">
+      <h2>Solution</h2>
+      <div class="section-content">{{ project.solution }}</div>
+    </section>
+  {% endif %}
+
+  {% if project.outcome %}
+    <section class="project-section">
+      <h2>Outcome & Impact</h2>
+      <div class="section-content">{{ project.outcome }}</div>
+    </section>
+  {% endif %}
+
+  {% if project.lessons_learned %}
+    <section class="project-section">
+      <h2>What I Learned</h2>
+      <div class="section-content">{{ project.lessons_learned }}</div>
+    </section>
+  {% endif %}
+
+  <footer class="project-footer">
+    <a href="{% url 'portfolio' %}" class="btn btn-text">← Back to Projects</a>
+  </footer>
+</article>
 {% endblock %}

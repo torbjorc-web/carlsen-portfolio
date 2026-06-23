@@ -1,19 +1,146 @@
 {% extends 'base.html' %}
+{% block title %}Contact | Torbjørn Carlsen{% endblock %}
 {% block content %}
-<h1>Contact</h1>
-
-{% if services_disabled %}
-  <div style="background-color: #f0f0f0; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center;">
-    <h2>Service Requests Coming Soon</h2>
-    <p>I'm currently preparing my services for launch. Service requests will be available soon.</p>
-    <p>For now, please check back later or explore my <a href="{% url 'portfolio' %}">portfolio</a> and <a href="{% url 'learning' %}">learning credentials</a>.</p>
+<section class="contact-section">
+  <div class="contact-header">
+    <h1>Let's build something together</h1>
+    <p>I'm open to consulting opportunities, collaboration, and interesting projects. Reach out through any of the channels below.</p>
   </div>
-{% else %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Send</button>
-  </form>
-{% endif %}
 
+  <!-- Direct Contact Information -->
+  <div class="contact-info-box">
+    <h2>Direct Contact</h2>
+    <div class="contact-methods">
+      <div class="contact-method">
+        <h3>Email</h3>
+        <p><a href="mailto:torbjorn@example.com" class="contact-link">torbjorn@example.com</a></p>
+      </div>
+      <div class="contact-method">
+        <h3>LinkedIn</h3>
+        <p><a href="https://linkedin.com/in/torbjorn-carlsen" target="_blank" rel="noreferrer" class="contact-link">linkedin.com/in/torbjorn-carlsen</a></p>
+      </div>
+      <div class="contact-method">
+        <h3>GitHub</h3>
+        <p><a href="https://github.com/torbjorc-web" target="_blank" rel="noreferrer" class="contact-link">github.com/torbjorc-web</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Request Section -->
+  {% if services_disabled %}
+    <div class="service-request-box">
+      <h2>Service Requests Coming Soon</h2>
+      <p>I'm currently preparing my services for launch. Service requests will be available soon.</p>
+      <p>In the meantime, explore my <a href="{% url 'portfolio' %}">portfolio</a> and <a href="{% url 'learning' %}">learning credentials</a>, and feel free to reach out directly via email or LinkedIn.</p>
+    </div>
+  {% else %}
+    <div class="contact-form-section">
+      <h2>Send a Message</h2>
+      <p>Tell me about your project and how I can help. Add your contact information below so I can follow up.</p>
+      <form method="post" class="contact-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  {% endif %}
+
+  <!-- Quick Links -->
+  <div class="contact-links">
+    <h3>Or explore my work</h3>
+    <ul>
+      <li><a href="{% url 'portfolio' %}">View Portfolio</a></li>
+      <li><a href="{% url 'learning_list' %}">See Credentials</a></li>
+      <li><a href="{% url 'service_list' %}">Browse Services</a></li>
+    </ul>
+  </div>
+</section>
+
+<style>
+.contact-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contact-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.contact-info-box {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.contact-method h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.contact-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+.service-request-box {
+  background-color: #fef3c7;
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 4px solid #f59e0b;
+  margin-bottom: 2rem;
+}
+
+.contact-form-section {
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  margin-top: 1.5rem;
+}
+
+.contact-links {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.contact-links ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.contact-links a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-links a:hover {
+  text-decoration: underline;
+}
+</style>
 {% endblock %}

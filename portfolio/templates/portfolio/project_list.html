@@ -52,6 +52,9 @@
           </div>
           <div class="project-actions">
             <a class="btn" href="{% url 'project_detail' project.slug %}" target="_blank" rel="noreferrer">Read case study</a>
+            {% if project.github_url %}
+              <a class="btn button-link" href="{{ project.github_url }}" target="_blank" rel="noreferrer">GitHub</a>
+            {% endif %}
             {% if project.demo_url %}
               <a class="btn button-link" href="{{ project.demo_url }}" target="_blank" rel="noreferrer">Live demo</a>
             {% endif %}

@@ -27,8 +27,6 @@
             {% csrf_token %}
             <button type="submit" class="logout-button">{% trans "Logout" %}</button>
           </form>
-        {% else %}
-          <a href="{% url 'login' %}">{% trans "Admin login" %}</a>
         {% endif %}
         
         <!-- Language Switcher -->
