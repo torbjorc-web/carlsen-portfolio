@@ -1,4 +1,4 @@
-# Django portfolio starter
+﻿# Django portfolio starter
 
 Generated starter scaffold for the portfolio site with:
 - core, portfolio, services, learning apps
@@ -22,3 +22,18 @@ Files included:
 - `home_html.txt`
 - `requirements_txt.txt`
 - `learning_seed_py.txt`
+
+## Fresh Clone Setup (Database)
+
+`db.sqlite3` is intentionally ignored and not committed. After cloning, create your local database by running migrations:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+If you already have the virtual environment, start from `Activate.ps1`.
