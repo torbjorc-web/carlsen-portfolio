@@ -1,11 +1,59 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
-<section>
-  <h1>Torbjørn Carlsen</h1>
-  <p>Python, Django, Data Science, and AI Solutions</p>
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">{% trans "Portfolio Overview" %}</span>
+      <h1>{% trans "Python, Django, AI and IT Support in one practical profile" %}</h1>
+      <p>
+        {% trans "I build structured web solutions, test AI-driven ideas, and deliver practical IT support workflows. This home page gives you a quick summary, while deeper details are available in Services, Projects, Learning, and Contact." %}
+      </p>
+      <div class="home-cta-row">
+        <a class="button-link" href="{% url 'service_list' %}">{% trans "Explore Services" %}</a>
+        <a class="button-link button-link-secondary" href="{% url 'project_list' %}">{% trans "View Projects" %}</a>
+        <a class="text-btn" href="{% url 'contact' %}">{% trans "Start a conversation" %}</a>
+      </div>
+    </div>
+    <div class="card home-summary-card">
+      <h2>{% trans "At a glance" %}</h2>
+      <ul class="home-summary-list">
+        <li>{% trans "Full-stack Django structure with reusable templates" %}</li>
+        <li>{% trans "Hands-on AI and machine learning portfolio projects" %}</li>
+        <li>{% trans "Data analysis and reporting mindset" %}</li>
+        <li>{% trans "IT support and Microsoft 365 practical knowledge" %}</li>
+      </ul>
+    </div>
+  </div>
 </section>
-<section>
-  <h2>Learning and certifications</h2>
-  <p>Structured training across AI engineering, data science, web development, and game development.</p>
+
+<section class="container home-section">
+  <div class="grid cols-3">
+    <article class="card home-metric">
+      <h3>{% trans "Web" %}</h3>
+      <p>{% trans "Django apps with clear routing, models, and maintainable templates." %}</p>
+    </article>
+    <article class="card home-metric">
+      <h3>{% trans "AI and Data" %}</h3>
+      <p>{% trans "LLM experiments, machine learning practice, and analysis-focused projects." %}</p>
+    </article>
+    <article class="card home-metric">
+      <h3>{% trans "IT Support" %}</h3>
+      <p>{% trans "System support, troubleshooting, and M365-oriented service thinking." %}</p>
+    </article>
+  </div>
+</section>
+
+<section class="container home-section">
+  <div class="card home-next-steps">
+    <span class="eyebrow">{% trans "Best Next Step" %}</span>
+    <h2>{% trans "Need details fast?" %}</h2>
+    <p>{% trans "If you are evaluating me for a role, start with Projects for examples, then Services for how I approach delivery, and finally Contact for direct dialogue." %}</p>
+    <div class="home-quick-links">
+      <a class="project-link" href="{% url 'project_list' %}">{% trans "Projects" %}</a>
+      <a class="project-link" href="{% url 'learning_list' %}">{% trans "Learning" %}</a>
+      <a class="project-link" href="{% url 'about' %}">{% trans "About" %}</a>
+    </div>
+  </div>
 </section>
 {% endblock %}
