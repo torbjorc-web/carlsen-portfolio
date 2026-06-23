@@ -1,11 +1,307 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Learning and Certifications</h1>
-{% for credential in credentials %}
-  <article>
-    <h2>{{ credential.title }}</h2>
-    <p>{{ credential.summary }}</p>
-    <p><strong>Completed:</strong> {{ credential.completed_at }}</p>
-  </article>
-{% endfor %}
+<section class="learning-section">
+  <h1>Learning & Certifications</h1>
+  <p class="section-intro">Professional certifications, career paths, and continuous learning achievements across AI/ML, Data Science, and Full-Stack Development.</p>
+
+  {% if credentials %}
+    <!-- Featured Credentials -->
+    {% with featured=credentials|dictsort:"is_featured" %}
+      <div class="credentials-featured">
+        <h2>Featured Achievements</h2>
+        <div class="credentials-grid">
+          {% for credential in credentials %}
+            {% if credential.is_featured %}
+            <article class="credential-card featured">
+              <div class="credential-header">
+                <h3>{{ credential.title }}</h3>
+                <span class="credential-type">{{ credential.get_credential_type_display }}</span>
+              </div>
+              <p class="provider">{{ credential.provider }}</p>
+              {% if credential.summary %}
+                <p class="summary">{{ credential.summary }}</p>
+              {% endif %}
+              {% if credential.completed_at %}
+                <p class="completed-date">
+                  <strong>Completed:</strong> {{ credential.completed_at|date:"F Y" }}
+                </p>
+              {% endif %}
+              {% if credential.skills_text %}
+                <div class="skills-list">
+                  <strong>Skills:</strong> {{ credential.skills_text }}
+                </div>
+              {% endif %}
+              {% if credential.skill_areas.all %}
+                <div class="skill-areas">
+                  {% for area in credential.skill_areas.all %}
+                    <span class="skill-area-tag">{{ area.name }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endwith %}
+
+    <!-- All Credentials -->
+    <div class="credentials-all">
+      <h2>All Credentials</h2>
+      <div class="credentials-list">
+        {% for credential in credentials %}
+          <article class="credential-item">
+            <div class="credential-content">
+              <h3>{{ credential.title }}</h3>
+              <p class="meta">
+                <span class="provider">{{ credential.provider }}</span>
+                <span class="type">{{ credential.get_credential_type_display }}</span>
+                {% if credential.completed_at %}
+                  <span class="date">{{ credential.completed_at|date:"M Y" }}</span>
+                {% endif %}
+              </p>
+              {% if credential.summary %}
+                <p>{{ credential.summary }}</p>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+
+  {% else %}
+    <p class="no-credentials">No credentials yet. Check back soon!</p>
+  {% endif %}
+
+</section>
+
+<style>
+.learning-section {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.learning-section h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+}
+
+.section-intro {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.credentials-featured {
+  margin-bottom: 3rem;
+}
+
+.credentials-featured h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.credentials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.credential-card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.credential-card.featured {
+  border: 2px solid #4CAF50;
+  background: #f9fff9;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.15);
+}
+
+.credential-card:hover {
+  border-color: #2196F3;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+.credential-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.credential-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #1a1a1a;
+  flex: 1;
+}
+
+.credential-type {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-left: 0.5rem;
+}
+
+.credential-card.featured .credential-type {
+  background: #c8e6c9;
+  color: #2e7d32;
+}
+
+.provider {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0.5rem 0;
+}
+
+.summary {
+  margin: 0.75rem 0;
+  line-height: 1.5;
+  color: #555;
+}
+
+.completed-date {
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.skills-list {
+  margin: 1rem 0 0.75rem 0;
+}
+
+.skills-list strong {
+  display: inline;
+  color: #333;
+  margin-right: 0.5rem;
+}
+
+.skill-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.skill-area-tag {
+  background: #fff3e0;
+  color: #e65100;
+  padding: 0.3rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.credentials-all {
+  margin-top: 3rem;
+}
+
+.credentials-all h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.credentials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.credential-item {
+  background: #fff;
+  border-left: 4px solid #2196F3;
+  padding: 1.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.credential-item:hover {
+  background: #f5f5f5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.credential-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: #1a1a1a;
+}
+
+.meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: #666;
+  flex-wrap: wrap;
+}
+
+.meta span {
+  display: inline-block;
+}
+
+.provider {
+  font-weight: 500;
+  color: #2196F3;
+}
+
+.type {
+  background: #f0f0f0;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+
+.date {
+  color: #999;
+}
+
+.no-credentials {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .learning-section {
+    padding: 1rem;
+  }
+
+  .learning-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .credentials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .credential-header {
+    flex-direction: column;
+  }
+
+  .credential-type {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    align-self: flex-start;
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+</style>
 {% endblock %}
