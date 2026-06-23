@@ -63,7 +63,7 @@ USE_TZ = True
 # Language configuration
 LANGUAGES = [
     ('en', 'English'),
-    ('no', 'Norsk'),
+    ('nb', 'Norsk'),
 ]
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
