@@ -9,7 +9,7 @@ ALLOWED_HOSTS = [
     ".onrender.com",
 ]
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get("DATABASE_URL", "").strip()
 
 if DATABASE_URL:
     DATABASES = {
@@ -22,3 +22,4 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+
