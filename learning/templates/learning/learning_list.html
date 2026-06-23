@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Learning and Certifications</h1>
+{% for credential in credentials %}
+  <article>
+    <h2>{{ credential.title }}</h2>
+    <p>{{ credential.summary }}</p>
+    <p><strong>Completed:</strong> {{ credential.completed_at }}</p>
+  </article>
+{% endfor %}
+{% endblock %}
