@@ -23,7 +23,10 @@
         {% if user.is_authenticated and user.is_staff %}
           <a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a>
           <a href="{% url 'password_change' %}">{% trans "Change password" %}</a>
-          <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
+          <form method="post" action="{% url 'logout' %}" class="logout-form">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">{% trans "Logout" %}</button>
+          </form>
         {% else %}
           <a href="{% url 'login' %}">{% trans "Admin login" %}</a>
         {% endif %}
