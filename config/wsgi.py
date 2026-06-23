@@ -1,11 +1,15 @@
 import os
 import traceback
 
+import django
 from django.core.management import call_command
 from django.core.wsgi import get_wsgi_application
 
 # Use prod settings by default, can be overridden by environment variable.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", os.getenv("DJANGO_SETTINGS_MODULE", "config.settings.prod"))
+
+# Setup Django first
+django.setup()
 
 # Hobby deployment helper: run migrations automatically on container startup.
 if os.getenv("RUN_MIGRATIONS_ON_START", "1") == "1":
