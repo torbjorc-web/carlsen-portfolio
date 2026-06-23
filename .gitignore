@@ -1,0 +1,49 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# Django local artifacts
+*.log
+local_settings.py
+db.sqlite3
+*.sqlite3
+media/
+
+# Temporary downloads/files
+*.crdownload
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+venv/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# Downloads / temp files
+*.crdownload
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
