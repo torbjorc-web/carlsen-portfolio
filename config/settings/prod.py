@@ -8,13 +8,21 @@ from .base import *
 DEBUG = False
 ALLOWED_HOSTS = [host for host in os.environ.get('ALLOWED_HOSTS', '*').split(',') if host]
 
-DATABASES = {
-	'default': dj_database_url.config(
-		default=os.getenv('DATABASE_URL', f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
-		conn_max_age=600,
-		ssl_require=bool(os.getenv('DATABASE_URL')),
-	)
-}
+# Database configuration
+if os.getenv('DATABASE_URL'):
+	DATABASES = {
+		'default': dj_database_url.config(
+			conn_max_age=600,
+			ssl_require=True,
+		)
+	}
+else:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.sqlite3',
+			'NAME': BASE_DIR / 'db.sqlite3',
+		}
+	}
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
