@@ -14,27 +14,27 @@
             {% if credential.is_featured %}
             <article class="credential-card featured">
               <div class="credential-header">
-                <h3>{{ credential.title }}</h3>
-                <span class="credential-type">{{ credential.get_credential_type_display }}</span>
+                <h3 style="color: #1a202c !important; margin-top: 0;">{{ credential.title }}</h3>
+                <span class="credential-type" style="color: #1a202c !important;">{{ credential.get_credential_type_display }}</span>
               </div>
-              <p class="provider">{{ credential.provider }}</p>
+              <p class="provider" style="color: #1a202c !important;">{{ credential.provider }}</p>
               {% if credential.summary %}
-                <p class="summary">{{ credential.summary }}</p>
+                <p class="summary" style="color: #555 !important;">{{ credential.summary }}</p>
               {% endif %}
               {% if credential.completed_at %}
-                <p class="completed-date">
-                  <strong>Completed:</strong> {{ credential.completed_at|date:"F Y" }}
+                <p class="completed-date" style="color: #1a202c !important;">
+                  <strong style="color: #1a202c !important;">Completed:</strong> {{ credential.completed_at|date:"F Y" }}
                 </p>
               {% endif %}
               {% if credential.skills_text %}
-                <div class="skills-list">
-                  <strong>Skills:</strong> {{ credential.skills_text }}
+                <div class="skills-list" style="color: #1a202c !important;">
+                  <strong style="color: #1a202c !important;">Skills:</strong> <span style="color: #555 !important;">{{ credential.skills_text }}</span>
                 </div>
               {% endif %}
               {% if credential.skill_areas.all %}
                 <div class="skill-areas">
                   {% for area in credential.skill_areas.all %}
-                    <span class="skill-area-tag">{{ area.name }}</span>
+                    <span class="skill-area-tag" style="color: #1a202c !important;">{{ area.name }}</span>
                   {% endfor %}
                 </div>
               {% endif %}
@@ -52,21 +52,21 @@
         {% for credential in credentials %}
           <article class="credential-item">
             <div class="credential-content">
-              <h3>{{ credential.title }}</h3>
-              <p class="meta">
-                <span class="provider">{{ credential.provider }}</span>
-                <span class="type">{{ credential.get_credential_type_display }}</span>
+              <h3 style="color: #1a202c !important; margin-top: 0;">{{ credential.title }}</h3>
+              <p class="meta" style="color: #1a202c !important;">
+                <span class="provider" style="color: #1a202c !important;">{{ credential.provider }}</span>
+                <span class="type" style="color: #1a202c !important;">{{ credential.get_credential_type_display }}</span>
                 {% if credential.completed_at %}
-                  <span class="date">{{ credential.completed_at|date:"M Y" }}</span>
+                  <span class="date" style="color: #1a202c !important;">{{ credential.completed_at|date:"M Y" }}</span>
                 {% endif %}
               </p>
               {% if credential.summary %}
-                <p>{{ credential.summary }}</p>
+                <p style="color: #555 !important;">{{ credential.summary }}</p>
               {% endif %}
               {% if credential.skill_areas.all %}
                 <div class="skill-areas-inline">
                   {% for area in credential.skill_areas.all %}
-                    <span class="skill-area-tag">{{ area.name }}</span>
+                    <span class="skill-area-tag" style="color: #1a202c !important;">{{ area.name }}</span>
                   {% endfor %}
                 </div>
               {% endif %}
