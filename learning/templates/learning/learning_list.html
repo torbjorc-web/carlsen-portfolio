@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="learning-section">
-  <h1 style="color: #1a202c; margin-bottom: 0.5rem; font-size: 2.2rem;">📚 Course Certificates & Continuous Learning</h1>
-  <p class="section-intro" style="color: #555; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">Verified course certificates, career paths, and continuous skill development across Python, Web Development, AI/ML, Data Science, and IT Support.</p>
+  <h1 style="color: #1a202c !important; margin-bottom: 0.5rem; font-size: 2.2rem;">📚 Course Certificates & Continuous Learning</h1>
+  <p class="section-intro" style="color: #555 !important; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">Verified course certificates, career paths, and continuous skill development across Python, Web Development, AI/ML, Data Science, and IT Support.</p>
 
   {% if credentials %}
     <!-- Featured Credentials -->
     {% with featured=credentials|dictsort:"is_featured" %}
       <div class="credentials-featured">
-        <h2 style="color: #1a202c; font-size: 1.8rem; margin-bottom: 1.5rem;">⭐ Featured Achievements</h2>
+        <h2 style="color: #1a202c !important; font-size: 1.8rem; margin-bottom: 1.5rem;">⭐ Featured Achievements</h2>
         <div class="credentials-grid">
           {% for credential in credentials %}
             {% if credential.is_featured %}
@@ -47,7 +47,7 @@
 
     <!-- All Credentials -->
     <div class="credentials-all">
-      <h2 style="color: #1a202c; font-size: 1.8rem; margin-bottom: 1.5rem;">📜 All Credentials</h2>
+      <h2 style="color: #1a202c !important; font-size: 1.8rem; margin-bottom: 1.5rem;">📜 All Credentials</h2>
       <div class="credentials-list">
         {% for credential in credentials %}
           <article class="credential-item">
