@@ -1,38 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ project.title }}</h1>
-<p>{{ project.short_description }}</p>
-
-{% if project.github_url %}
-  <p><strong>GitHub:</strong> <a href="{{ project.github_url }}" target="_blank" rel="noreferrer">{{ project.github_url }}</a></p>
-{% endif %}
-
-{% if project.demo_url %}
-  <p><strong>Live Demo:</strong> <a href="{{ project.demo_url }}" target="_blank" rel="noreferrer">{{ project.demo_url }}</a></p>
-{% endif %}
-
-{% if project.technologies.all %}
-  <h3>Technologies</h3>
-  <ul>
-  {% for tech in project.technologies.all %}
-    <li>{{ tech.name }}</li>
-  {% endfor %}
-  </ul>
-{% endif %}
-
-<h2>Problem</h2>
-<p>{{ project.problem }}</p>
-
-<h2>Solution</h2>
-<p>{{ project.solution }}</p>
-
-<h2>Outcome</h2>
-<p>{{ project.outcome }}</p>
-
-{% if project.lessons_learned %}
-  <h2>What I Learned</h2>
-  <p>{{ project.lessons_learned }}</p>
-{% endif %}
-
-<p><a href="{% url 'portfolio' %}">Back to Projects</a></p>
+<div class="container">
+  <h1>{{ project.title }}</h1>
+  <p>Testing...</p>
+  <a href="{% url 'portfolio' %}">Back to Projects</a>
+</div>
 {% endblock %}
+
