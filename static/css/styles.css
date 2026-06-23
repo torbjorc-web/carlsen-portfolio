@@ -41,8 +41,37 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+.language-switcher {
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--border);
+}
+
+.language-switcher select {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.language-switcher select:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--accent);
+}
+
+.language-switcher select:focus {
+  outline: none;
+  background: rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
+}
 .hero {
   padding: 5rem 0 3rem;
 }

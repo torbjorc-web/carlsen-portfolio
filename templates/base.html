@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}{% endget_current_language %}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Torbjørn Carlsen{% endblock %}</title>
   {% load static %}
+  {% load i18n %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <script defer src="{% static 'js/main.js' %}"></script>
 </head>
@@ -13,19 +14,30 @@
     <div class="container">
       <a href="/" class="brand">Torbjørn Carlsen</a>
       <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="{% url 'service_list' %}">Services</a>
-        <a href="{% url 'project_list' %}">Projects</a>
-        <a href="{% url 'learning_list' %}">Learning</a>
-        <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'contact' %}">Contact</a>
+        <a href="/">{% trans "Home" %}</a>
+        <a href="{% url 'service_list' %}">{% trans "Services" %}</a>
+        <a href="{% url 'project_list' %}">{% trans "Projects" %}</a>
+        <a href="{% url 'learning_list' %}">{% trans "Learning" %}</a>
+        <a href="{% url 'about' %}">{% trans "About" %}</a>
+        <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
         {% if user.is_authenticated and user.is_staff %}
-          <a href="{% url 'dashboard' %}">Dashboard</a>
-          <a href="{% url 'password_change' %}">Change password</a>
-          <a href="{% url 'logout' %}">Logout</a>
+          <a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a>
+          <a href="{% url 'password_change' %}">{% trans "Change password" %}</a>
+          <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
         {% else %}
-          <a href="{% url 'login' %}">Admin login</a>
+          <a href="{% url 'login' %}">{% trans "Admin login" %}</a>
         {% endif %}
+        
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+          {% get_available_languages as languages %}
+          {% get_current_language as LANGUAGE_CODE %}
+          <select id="language-select" onchange="changeLanguage(this.value)" title="{% trans 'Select language' %}">
+            {% for code, name in languages %}
+              <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+          </select>
+        </div>
       </nav>
     </div>
   </header>
@@ -36,8 +48,16 @@
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; {% now "Y" %} Torbjørn Carlsen. All rights reserved.</p>
+      <p>&copy; {% now "Y" %} Torbjørn Carlsen. {% trans "All rights reserved." %}</p>
     </div>
   </footer>
+
+  <script>
+  function changeLanguage(languageCode) {
+    const currentPath = window.location.pathname.replace(/^\/[a-z]{2}\//, '/').replace(/^\/$/, '');
+    const newPath = '/' + languageCode + (currentPath === '/' ? '' : currentPath);
+    window.location.href = newPath;
+  }
+  </script>
 </body>
 </html>
