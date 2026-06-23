@@ -24,7 +24,9 @@ if DATABASE_URL:
             "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
         }
     except Exception:
-        # Fall back safely for hobby deployments when DATABASE_URL is malformed.
         DATABASES = SQLITE_FALLBACK
 else:
     DATABASES = SQLITE_FALLBACK
+
+# Hobby fallback: serve static files even without collectstatic.
+WHITENOISE_USE_FINDERS = True
