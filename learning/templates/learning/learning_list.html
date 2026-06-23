@@ -19,7 +19,7 @@
               </div>
               <p class="provider" style="color: #1a202c !important;">{{ credential.provider }}</p>
               {% if credential.summary %}
-                <p class="summary" style="color: #555 !important;">{{ credential.summary }}</p>
+                <p class="summary" style="color: #1a202c !important; font-weight: 500;">{{ credential.summary }}</p>
               {% endif %}
               {% if credential.completed_at %}
                 <p class="completed-date" style="color: #1a202c !important;">
@@ -28,7 +28,7 @@
               {% endif %}
               {% if credential.skills_text %}
                 <div class="skills-list" style="color: #1a202c !important;">
-                  <strong style="color: #1a202c !important;">Skills:</strong> <span style="color: #555 !important;">{{ credential.skills_text }}</span>
+                  <strong style="color: #1a202c !important;">Skills:</strong> <span style="color: #1a202c !important; font-weight: 500;">{{ credential.skills_text }}</span>
                 </div>
               {% endif %}
               {% if credential.skill_areas.all %}
@@ -61,7 +61,7 @@
                 {% endif %}
               </p>
               {% if credential.summary %}
-                <p style="color: #555 !important;">{{ credential.summary }}</p>
+                <p style="color: #1a202c !important; font-weight: 500;">{{ credential.summary }}</p>
               {% endif %}
               {% if credential.skill_areas.all %}
                 <div class="skill-areas-inline">
