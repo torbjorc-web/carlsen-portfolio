@@ -34,8 +34,15 @@ def about(request):
 def contact(request):
     selected_service_title = None
     form = None
+    services_disabled = True  # Set to False when services are ready
 
     if request.method == 'POST':
+        if services_disabled:
+            # Don't process form if services are disabled
+            return render(request, 'core/contact.html', {
+                'services_disabled': services_disabled,
+                'selected_service_title': selected_service_title,
+            })
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
@@ -43,14 +50,16 @@ def contact(request):
         selected_service_title = request.POST.get('selected_service')
     else:
         selected_service_title = request.GET.get('service')
-        initial = {}
-        if selected_service_title:
-            initial['selected_service'] = selected_service_title
-        form = ContactForm(initial=initial)
+        if not services_disabled:
+            initial = {}
+            if selected_service_title:
+                initial['selected_service'] = selected_service_title
+            form = ContactForm(initial=initial)
 
     return render(request, 'core/contact.html', {
         'form': form,
         'selected_service_title': selected_service_title,
+        'services_disabled': services_disabled,
     })
 
 

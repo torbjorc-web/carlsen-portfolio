@@ -9,9 +9,15 @@ def service_list(request):
         services = list(Service.objects.all())
     except (OperationalError, ProgrammingError):
         services = []
-    return render(request, 'services/service_list.html', {'services': services})
+    return render(request, 'services/service_list.html', {
+        'services': services,
+        'services_disabled': True,  # Set to False when services are ready
+    })
 
 
 def service_detail(request, slug):
     service = get_object_or_404(Service, slug=slug)
-    return render(request, 'services/service_detail.html', {'service': service})
+    return render(request, 'services/service_detail.html', {
+        'service': service,
+        'services_disabled': True,  # Set to False when services are ready
+    })

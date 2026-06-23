@@ -8,6 +8,9 @@
       <h1>Pakker for web, data, AI og digital opplæring</h1>
       <p>Velg en pakke som passer til ditt prosjekt. Alle løsninger er laget for små bedrifter, skoler og organisasjoner som vil ha praktisk digital støtte.</p>
       <p class="soft-note">Flere tjenester og tilpasninger kommer snart.</p>
+      {% if services_disabled %}
+        <p style="color: #ff6b6b; margin-top: 15px; font-weight: 500;">Service requests are not yet available. Please check back soon.</p>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -23,7 +26,9 @@
         <li><strong>E-handel grunnpakke</strong> – Shopify/WooCommerce med tilpasning<br>30 000–60 000 kr</li>
       </ul>
       <div class="service-actions">
-        <a class="btn" href="{% url 'contact' %}?service=Webutvikling">Contact about this service</a>
+        {% if not services_disabled %}
+          <a class="btn" href="{% url 'contact' %}?service=Webutvikling">Contact about this service</a>
+        {% endif %}
       </div>
     </article>
 
@@ -36,7 +41,9 @@
         <li><strong>Datavasking / ETL</strong> – pandas-baserte løsninger<br>700–900 kr/t</li>
       </ul>
       <div class="service-actions">
-        <a class="btn" href="{% url 'contact' %}?service=Dataanalyse%20og%20BI">Contact about this service</a>
+        {% if not services_disabled %}
+          <a class="btn" href="{% url 'contact' %}?service=Dataanalyse%20og%20BI">Contact about this service</a>
+        {% endif %}
       </div>
     </article>
 
@@ -50,7 +57,9 @@
         <li><strong>Proof of Concept</strong> – ML + dashboard + rapport (fast pris)<br>35 000 kr</li>
       </ul>
       <div class="service-actions">
-        <a class="btn" href="{% url 'contact' %}?service=Maskinlæring%20og%20AI">Contact about this service</a>
+        {% if not services_disabled %}
+          <a class="btn" href="{% url 'contact' %}?service=Maskinlæring%20og%20AI">Contact about this service</a>
+        {% endif %}
       </div>
     </article>
 
@@ -63,7 +72,9 @@
         <li><strong>Kursutvikling</strong> – skreddersydde e-læringskurs<br>20 000–60 000 kr</li>
       </ul>
       <div class="service-actions">
-        <a class="btn" href="{% url 'contact' %}?service=IKT-veiledning%20og%20opplæring">Contact about this service</a>
+        {% if not services_disabled %}
+          <a class="btn" href="{% url 'contact' %}?service=IKT-veiledning%20og%20opplæring">Contact about this service</a>
+        {% endif %}
       </div>
     </article>
 
@@ -75,7 +86,9 @@
         <li><strong>Innholdsproduksjon</strong> – norsk/engelsk tekst, oversettelse<br>600–800 kr/t</li>
       </ul>
       <div class="service-actions">
-        <a class="btn" href="{% url 'contact' %}?service=Saksbehandling%20og%20dokumentstøtte">Contact about this service</a>
+        {% if not services_disabled %}
+          <a class="btn" href="{% url 'contact' %}?service=Saksbehandling%20og%20dokumentstøtte">Contact about this service</a>
+        {% endif %}
       </div>
     </article>
   </div>

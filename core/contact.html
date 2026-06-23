@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Contact</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Send</button>
-</form>
+
+{% if services_disabled %}
+  <div style="background-color: #f0f0f0; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center;">
+    <h2>Service Requests Coming Soon</h2>
+    <p>I'm currently preparing my services for launch. Service requests will be available soon.</p>
+    <p>For now, please check back later or explore my <a href="{% url 'portfolio' %}">portfolio</a> and <a href="{% url 'learning' %}">learning credentials</a>.</p>
+  </div>
+{% else %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send</button>
+  </form>
+{% endif %}
+
 {% endblock %}
