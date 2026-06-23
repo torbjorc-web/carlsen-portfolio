@@ -6,7 +6,7 @@
 
 ## 1. Profil: Hvem og hva jeg søker
 
-**Torbjørn Carlsen** – Utvikler i karrierewending med fokus på:
+**Torbjørn Carlsen** – Utvikler i karriere endring med fokus på:
 
 - **Python & Django** web-development
 - **AI/ML** (LLM, chatbots, bildeklassifisering, nevrale nettverk)
@@ -81,11 +81,11 @@ Prosjektene under viser kompetanse på tvers av flere domener og passer til ulik
 
 ### ✅ Du får en utvikler som:
 
-- **Forstår web fra båe sider**: Backend (Django ORM, views, migrations) og frontend (templates, static assets, CSS)
+- **Forstår web fra begge sider**: Backend (Django ORM, views, migrations) og frontend (templates, static assets, CSS)
 - **Kan håndtere flere teknologier**: Python, AI/ML, web, data – fleksibel i problemløsning
 - **Tar initiativ**: Har bygget multiple prosjekter fra ide til kode, viser selvstyring
 - **Dokumenterer**: README-filer, struktur, migrations – tenker på maintainability
-- **Er villig til å lære**: Karrierewendingen viser motivasjon og evne til rask opplæring
+- **Er villig til å lære**: Karrierevendingen viser motivasjon og evne til rask opplæring
 - **Leverer struktur**: Alle prosjekter følger best practices (modularitet, versjonskontroll, settings-håndtering)
 
 ### 🎯 For spesifikke stillinger:
