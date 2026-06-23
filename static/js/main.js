@@ -25,4 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   }
+
+  const linkCards = document.querySelectorAll('[data-href]');
+  linkCards.forEach(card => {
+    card.classList.add('clickable-card');
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('a')) return;
+      window.open(card.dataset.href, '_blank');
+    });
+  });
 });

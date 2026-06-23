@@ -1,9 +1,66 @@
 {% extends 'base.html' %}
+{% block title %}Contact{% endblock %}
 {% block content %}
-<h1>Contact</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Send</button>
-</form>
+<section class="container contact-page">
+  <div class="card reveal">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <h1>Let’s build something together</h1>
+        {% if selected_service_title %}
+          <p>You selected <strong>{{ selected_service_title }}</strong>. Please share your details and what you need so I can contact you with the right solution.</p>
+        {% else %}
+          <p>Tell me about your project and how I can help. Add your contact information below so I can follow up.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="contact-steps">
+      <div class="step-card {% if not selected_service_title %}active{% endif %}">
+        <span>Step 1</span>
+        <h3>Choose a service</h3>
+        <p>Click a package on the Services page or describe your need below if you want a custom request.</p>
+      </div>
+      <div class="step-card {% if selected_service_title %}active{% endif %}">
+        <span>Step 2</span>
+        <h3>Describe your project</h3>
+        <p>Share your goals, timeline, and contact details so I can reply with a tailored solution.</p>
+      </div>
+    </div>
+
+    <form method="post" class="contact-form">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="form-row">
+        {{ form.name.label_tag }}
+        {{ form.name }}
+        {{ form.name.errors }}
+      </div>
+      <div class="form-row">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+      {% if selected_service_title %}
+        <div class="form-row selected-service">
+          <label>Selected service</label>
+          <p>{{ selected_service_title }}</p>
+        </div>
+        {{ form.selected_service }}
+      {% else %}
+        <div class="form-row">
+          {{ form.project_type.label_tag }}
+          {{ form.project_type }}
+          {{ form.project_type.errors }}
+        </div>
+      {% endif %}
+      <div class="form-row">
+        {{ form.message.label_tag }}
+        {{ form.message }}
+        {{ form.message.errors }}
+      </div>
+      <button class="btn" type="submit">Send message</button>
+    </form>
+  </div>
+</section>
 {% endblock %}

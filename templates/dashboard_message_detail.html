@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Message detail{% endblock %}
+{% block content %}
+<section class="container dashboard-message-detail">
+  <div class="card reveal">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Message details</span>
+        <h1>{{ message.name }}</h1>
+        <p>{{ message.email }} · {{ message.project_type|default:'General inquiry' }}</p>
+      </div>
+      <div>
+        <a class="btn" href="{% url 'dashboard' %}">Back to dashboard</a>
+      </div>
+    </div>
+
+    <div class="message-preview">
+      <p><strong>Received:</strong> {{ message.created_at|date:'M j, Y H:i' }}</p>
+      <p><strong>Status:</strong> {{ message.is_read|yesno:'Read,Unread' }}</p>
+      <div class="message-body">
+        {{ message.message|linebreaks }}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

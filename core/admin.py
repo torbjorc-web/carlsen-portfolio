@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SiteSettings, AboutProfile, ContactMessage
+from .models import SiteSettings, AboutProfile, ContactMessage, LoginActivity
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
@@ -11,6 +11,12 @@ class AboutProfileAdmin(admin.ModelAdmin):
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'project_type', 'created_at', 'is_read')
+    list_display = ('name', 'email', 'selected_service', 'project_type', 'created_at', 'is_read')
     list_filter = ('is_read', 'created_at')
-    search_fields = ('name', 'email', 'project_type', 'message')
+    search_fields = ('name', 'email', 'selected_service', 'project_type', 'message')
+
+@admin.register(LoginActivity)
+class LoginActivityAdmin(admin.ModelAdmin):
+    list_display = ('user', 'ip_address', 'created_at')
+    list_filter = ('created_at', 'user')
+    search_fields = ('user__username', 'ip_address', 'user_agent')

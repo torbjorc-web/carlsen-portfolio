@@ -1,6 +1,35 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block title %}About | Torbjørn Carlsen{% endblock %}
 {% block content %}
-<h1>About Torbjørn Carlsen</h1>
-<p>I’m a Norway-based educator transitioning into IT consulting, with a focus on Python, Django, data science, AI, and practical web tools.</p>
-<p>My work combines structured communication, technical learning, and hands-on portfolio projects.</p>
+<section class="container about-hero">
+  <div class="card reveal about-card">
+    <div class="eyebrow">About Me</div>
+    <h1>Hi, I’m Torbjørn.</h1>
+    <p>As a Norway-based educator moving into IT consulting, I combine teaching experience with practical software engineering. My work centers on Python, Django, data science, and building polished digital products with clear user value.</p>
+    <p>I enjoy turning complex ideas into intuitive web solutions, creating compelling portfolio work, and sharing that progress through open-source projects.</p>
+    <div class="about-details">
+      <div>
+        <h2>What I do</h2>
+        <ul>
+          <li>Build scalable Django applications</li>
+          <li>Design clean UI with strong accessibility</li>
+          <li>Apply data science and AI to real use cases</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Focus areas</h2>
+        <ul>
+          <li>Web apps, portfolio sites, and dashboards</li>
+          <li>AI-enabled automation and predictions</li>
+          <li>Learning-driven product development</li>
+        </ul>
+      </div>
+    </div>
+    <div class="project-actions">
+      <a class="btn" href="/media/Torbjorn_Carlsen_oppdatert_CV.pdf" target="_blank" rel="noreferrer">Download updated CV</a>
+      <a class="text-btn" href="/contact/">Let's talk</a>
+    </div>
+  </div>
+</section>
 {% endblock %}

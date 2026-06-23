@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Admin login{% endblock %}
+{% block content %}
+<section class="container login-page">
+  <div class="card reveal login-card">
+    <span class="eyebrow">Admin login</span>
+    <h1>Sign in to your admin dashboard</h1>
+    <form method="post" class="login-form">
+      {% csrf_token %}
+      {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+      {% endif %}
+      <div class="form-row">
+        <label for="id_username">Username</label>
+        <input type="text" name="username" id="id_username" required autofocus>
+      </div>
+      <div class="form-row">
+        <label for="id_password">Password</label>
+        <input type="password" name="password" id="id_password" required>
+      </div>
+      <button class="btn" type="submit">Login</button>
+    </form>
+    <p class="soft-note">Only staff users can access the dashboard.</p>
+  </div>
+</section>
+{% endblock %}

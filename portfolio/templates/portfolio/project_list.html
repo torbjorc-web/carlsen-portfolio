@@ -1,10 +1,101 @@
 {% extends 'base.html' %}
+{% block title %}Projects | Torbjørn Carlsen{% endblock %}
 {% block content %}
-<h1>Projects</h1>
-{% for project in projects %}
-  <article>
-    <h2><a href="{% url 'project_detail' project.slug %}">{{ project.title }}</a></h2>
-    <p>{{ project.short_description }}</p>
-  </article>
-{% endfor %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Featured Projects</span>
+      <h1>Impactful work with measurable outcomes</h1>
+      <p>Explore high-value case studies and web experiences engineered for growth, clarity, and strong visual appeal.</p>
+      <p class="soft-note">More projects will be added soon, including client cases and web apps for logged-in users.</p>
+    </div>
+    <div class="hero-illustration" aria-hidden="true">
+      <svg viewBox="0 0 520 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#38bdf8" />
+            <stop offset="100%" stop-color="#2563eb" />
+          </linearGradient>
+        </defs>
+        <rect x="20" y="20" width="320" height="260" rx="32" fill="url(#grad1)" opacity="0.15" />
+        <rect x="70" y="80" width="260" height="180" rx="24" fill="#111827" stroke="rgba(148, 163, 184, 0.2)" stroke-width="2" />
+        <circle cx="130" cy="145" r="18" fill="#38bdf8" />
+        <path d="M110 192h140" stroke="#7dd3fc" stroke-width="6" stroke-linecap="round" />
+        <rect x="110" y="110" width="120" height="14" rx="7" fill="#94a3b8" />
+        <rect x="110" y="142" width="160" height="14" rx="7" fill="#e5e7eb" opacity="0.15" />
+        <rect x="110" y="174" width="90" height="14" rx="7" fill="#e5e7eb" opacity="0.15" />
+        <path d="M430 78c0 38-30 68-68 68s-68-30-68-68 30-68 68-68 68 30 68 68Z" fill="#1e293b" stroke="rgba(56, 189, 248, 0.35)" stroke-width="4" />
+        <path d="M406 70h26M406 90h26" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+        <rect x="368" y="190" width="120" height="18" rx="9" fill="#38bdf8" opacity="0.25" />
+        <rect x="368" y="222" width="80" height="18" rx="9" fill="#38bdf8" opacity="0.25" />
+        <path d="M248 300c12 26 48 22 62 0" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" opacity="0.7" />
+        <circle cx="68" cy="326" r="24" fill="#38bdf8" opacity="0.2" />
+      </svg>
+    </div>
+  </div>
+</section>
+<section class="container project-grid">
+  <div class="grid cols-2">
+    {% for project in projects %}
+      <article class="card project-card reveal" data-href="{% url 'project_detail' project.slug %}">
+        {% if project.cover_image %}
+          <img src="{{ project.cover_image.url }}" alt="{{ project.title }} cover" class="project-cover">
+        {% endif %}
+        <div class="project-card-body">
+          <p class="eyebrow">{{ project.client_type|default:'Case study' }}</p>
+          <h2><a class="project-link btn button-link" href="{% url 'project_detail' project.slug %}" target="_blank" rel="noreferrer">{{ project.title }}</a></h2>
+          <p>{{ project.short_description }}</p>
+          <div class="project-meta">
+            {% for tech in project.technologies.all %}
+              <span class="skill-tag">{{ tech.name }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-actions">
+            <a class="btn" href="{% url 'project_detail' project.slug %}" target="_blank" rel="noreferrer">Read case study</a>
+            {% if project.demo_url %}
+              <a class="btn button-link" href="{{ project.demo_url }}" target="_blank" rel="noreferrer">Live demo</a>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container repo-section">
+  <div class="section-header">
+    <div>
+      <span class="eyebrow">GitHub Repositories</span>
+      <h2>Open-source work from my GitHub profile</h2>
+    </div>
+    <a class="btn" href="https://github.com/torbjorc-web?tab=repositories" target="_blank" rel="noreferrer">View all repos</a>
+  </div>
+
+  <div class="grid cols-2 repo-grid">
+    {% for repo in github_repos %}
+      <article class="card repo-card reveal" data-href="{{ repo.html_url }}">
+        <div class="repo-card-body">
+          <div class="repo-header">
+            <h3><a class="project-link btn button-link" href="{{ repo.html_url }}" target="_blank" rel="noreferrer">{{ repo.name }}</a></h3>
+            {% if repo.language %}
+              <span class="repo-badge">{{ repo.language }}</span>
+            {% endif %}
+          </div>
+          <p>{{ repo.description|default:'A polished GitHub project with code, examples, and documentation.' }}</p>
+          <div class="repo-meta">
+            <span>⭐ {{ repo.stars }}</span>
+            {% if repo.updated_at %}
+              <span>Updated {{ repo.updated_at|date:'M j, Y' }}</span>
+            {% endif %}
+          </div>
+          <div class="project-actions">
+            <a class="btn button-link" href="{{ repo.html_url }}" target="_blank" rel="noreferrer">View on GitHub</a>
+            {% if repo.homepage %}
+              <a class="btn button-link" href="{{ repo.homepage }}" target="_blank" rel="noreferrer">Open demo</a>
+            {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}

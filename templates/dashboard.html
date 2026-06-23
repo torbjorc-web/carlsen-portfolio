@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<section class="container dashboard">
+  <div class="card reveal dashboard-summary">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Admin</span>
+        <h1>Dashboard overview</h1>
+        <p>{{ unread_count }} unread message{{ unread_count|pluralize }} · {{ message_count }} total messages</p>
+        <p>{{ login_activities|length }} recent login events from {{ unique_login_users }} users.</p>
+        <p class="soft-note">This dashboard is being extended with more insights, user project tracking, and new admin tools.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card reveal dashboard-section">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Messages</span>
+        <h2>Recent contact submissions</h2>
+      </div>
+    </div>
+    <div class="dashboard-list">
+      {% if messages %}
+        <table class="dashboard-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Project type</th>
+              <th>Preview</th>
+              <th>Received</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for message in messages %}
+              <tr class="{% if not message.is_read %}unread{% endif %}">
+                <td>{{ message.name }}</td>
+                <td>{{ message.email }}</td>
+                <td>{{ message.project_type|default:'—' }}</td>
+                <td>{{ message.message|truncatewords:18 }}</td>
+                <td>{{ message.created_at|date:'M j, Y H:i' }}</td>
+                <td>{{ message.is_read|yesno:'Read,Unread' }}</td>
+                <td><a class="btn btn-small" href="{% url 'message_detail' message.pk %}">View</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No contact messages yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="card reveal dashboard-section">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Login activity</span>
+        <h2>Recent logged-in users</h2>
+      </div>
+    </div>
+    <div class="dashboard-list">
+      {% if login_activities %}
+        <table class="dashboard-table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>IP address</th>
+              <th>Time</th>
+              <th>User agent</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for activity in login_activities %}
+              <tr>
+                <td>{{ activity.user.username }}</td>
+                <td>{{ activity.ip_address|default:'—' }}</td>
+                <td>{{ activity.created_at|date:'M j, Y H:i' }}</td>
+                <td>{{ activity.user_agent|truncatechars:40 }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No login activity recorded yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

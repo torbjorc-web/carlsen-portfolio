@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Site Under Construction{% endblock %}
+{% block content %}
+<section class="container under-construction">
+  <div class="card reveal">
+    <div class="under-construction-graphic">
+      <svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="10" y="40" width="120" height="90" rx="18" fill="rgba(56, 189, 248, 0.15)" />
+        <rect x="70" y="20" width="120" height="90" rx="18" fill="rgba(225, 255, 255, 0.08)" />
+        <circle cx="70" cy="90" r="16" fill="rgba(56, 189, 248, 0.35)" />
+        <circle cx="160" cy="70" r="14" fill="rgba(225, 255, 255, 0.18)" />
+        <path d="M28 110C38 95 55 88 70 95C86 102 102 115 118 108" stroke="rgba(56, 189, 248, 0.7)" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M86 60L98 68L108 52" stroke="rgba(56, 189, 248, 0.85)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="under-construction-copy">
+      <span class="eyebrow">Under Construction</span>
+      <h1>Coming back soon</h1>
+      <p>Everybody is welcome back. This page is still being built, but the rest of the site is ready to explore. More sections will be added soon.</p>
+      <p class="soft-note">Thanks for visiting — more content is coming.</p>
+    </div>
+    <div class="project-actions">
+      <a class="btn" href="{% url 'home' %}">Home</a>
+      <a class="btn" href="{% url 'project_list' %}">Projects</a>
+      <a class="btn" href="{% url 'about' %}">About</a>
+      <a class="btn" href="{% url 'contact' %}">Contact</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

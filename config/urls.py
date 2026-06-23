@@ -5,11 +5,15 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('django.contrib.auth.urls')),
     path('', include('core.urls')),
     path('services/', include('services.urls')),
     path('projects/', include('portfolio.urls')),
+    path('portfolio/', include('portfolio.urls')),
     path('learning/', include('learning.urls')),
 ]
+
+handler404 = 'core.views.under_construction'
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

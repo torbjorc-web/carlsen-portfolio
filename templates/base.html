@@ -14,11 +14,18 @@
       <a href="/" class="brand">Torbjørn Carlsen</a>
       <nav class="nav-links">
         <a href="/">Home</a>
-        <a href="/services/">Services</a>
-        <a href="/portfolio/">Projects</a>
-        <a href="/learning/">Learning</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
+        <a href="{% url 'service_list' %}">Services</a>
+        <a href="{% url 'project_list' %}">Projects</a>
+        <a href="{% url 'learning_list' %}">Learning</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'contact' %}">Contact</a>
+        {% if user.is_authenticated and user.is_staff %}
+          <a href="{% url 'dashboard' %}">Dashboard</a>
+          <a href="{% url 'password_change' %}">Change password</a>
+          <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a href="{% url 'login' %}">Admin login</a>
+        {% endif %}
       </nav>
     </div>
   </header>

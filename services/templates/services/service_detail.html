@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}{{ service.title }} | Services{% endblock %}
+{% block content %}
+<section class="container service-detail">
+  <div class="card reveal">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Service details</span>
+        <h1>{{ service.title }}</h1>
+        <p>{{ service.summary }}</p>
+      </div>
+      <div>
+        <a class="btn" href="{% url 'contact' %}?service={{ service.slug }}">Contact about this service</a>
+        <a class="btn button-link" href="{% url 'service_list' %}">Back to services</a>
+      </div>
+    </div>
+
+    <section class="service-info">
+      {% if service.description %}
+        <h2>Description</h2>
+        <p>{{ service.description|linebreaks }}</p>
+      {% endif %}
+      {% if service.problem_it_solves %}
+        <h2>Problem it solves</h2>
+        <p>{{ service.problem_it_solves|linebreaks }}</p>
+      {% endif %}
+      {% if service.deliverables %}
+        <h2>Deliverables</h2>
+        <p>{{ service.deliverables|linebreaks }}</p>
+      {% endif %}
+      {% if service.ideal_for %}
+        <h2>Ideal for</h2>
+        <p>{{ service.ideal_for|linebreaks }}</p>
+      {% endif %}
+    </section>
+  </div>
+</section>
+{% endblock %}

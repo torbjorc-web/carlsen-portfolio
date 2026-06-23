@@ -1,10 +1,101 @@
 {% extends 'base.html' %}
+{% block title %}Services{% endblock %}
 {% block content %}
-<h1>Services</h1>
-{% for service in services %}
-  <article>
-    <h2>{{ service.title }}</h2>
-    <p>{{ service.summary }}</p>
-  </article>
-{% endfor %}
+<section class="container services-hero">
+  <div class="section-header">
+    <div>
+      <span class="eyebrow">Services</span>
+      <h1>Pakker for web, data, AI og digital opplæring</h1>
+      <p>Velg en pakke som passer til ditt prosjekt. Alle løsninger er laget for små bedrifter, skoler og organisasjoner som vil ha praktisk digital støtte.</p>
+      <p class="soft-note">Flere tjenester og tilpasninger kommer snart.</p>
+    </div>
+  </div>
+</section>
+
+<section class="container services-grid">
+  <div class="grid cols-2">
+    <article class="card service-card reveal">
+      <span class="eyebrow">Pakke A</span>
+      <h2>Webutvikling</h2>
+      <ul class="service-list">
+        <li><strong>Enkel nettside</strong> – 5–8 sider, responsivt design, CMS<br>15 000–40 000 kr</li>
+        <li><strong>Liten webapp</strong> – Django/ASP.NET, brukerlogin, database<br>40 000–120 000 kr</li>
+        <li><strong>E-handel grunnpakke</strong> – Shopify/WooCommerce med tilpasning<br>30 000–60 000 kr</li>
+      </ul>
+      <div class="service-actions">
+        <a class="btn" href="{% url 'contact' %}?service=Webutvikling">Contact about this service</a>
+      </div>
+    </article>
+
+    <article class="card service-card reveal">
+      <span class="eyebrow">Pakke B</span>
+      <h2>Dataanalyse og BI</h2>
+      <ul class="service-list">
+        <li><strong>Tableau/Power BI-dashboard</strong> – visualisering for SMB, foreninger, skoler<br>8 000–25 000 kr</li>
+        <li><strong>Excel/SQL-rapportering</strong> – faste rapporter og automatisering<br>5 000–20 000 kr</li>
+        <li><strong>Datavasking / ETL</strong> – pandas-baserte løsninger<br>700–900 kr/t</li>
+      </ul>
+      <div class="service-actions">
+        <a class="btn" href="{% url 'contact' %}?service=Dataanalyse%20og%20BI">Contact about this service</a>
+      </div>
+    </article>
+
+    <article class="card service-card reveal">
+      <span class="eyebrow">Pakke C</span>
+      <h2>Maskinlæring og AI</h2>
+      <ul class="service-list">
+        <li><strong>ML-pilot</strong> – prediksjon, klassifisering med scikit-learn<br>30 000–80 000 kr</li>
+        <li><strong>NLP-løsninger</strong> – tekstklassifisering, sentiment, chatbot<br>25 000–70 000 kr</li>
+        <li><strong>AI-workshop</strong> – ansvarlig AI-bruk, ChatGPT-integrasjoner<br>8 000–18 000 kr/dag</li>
+        <li><strong>Proof of Concept</strong> – ML + dashboard + rapport (fast pris)<br>35 000 kr</li>
+      </ul>
+      <div class="service-actions">
+        <a class="btn" href="{% url 'contact' %}?service=Maskinlæring%20og%20AI">Contact about this service</a>
+      </div>
+    </article>
+
+    <article class="card service-card reveal">
+      <span class="eyebrow">Pakke D</span>
+      <h2>IKT-veiledning og opplæring</h2>
+      <ul class="service-list">
+        <li><strong>Digital opplæring SMB</strong> – Office 365, Google Workspace, sikkerhet<br>8 000–15 000 kr/dag</li>
+        <li><strong>1:1 IKT-veiledning</strong> – ansatte, seniorer, lærere<br>750–950 kr/t</li>
+        <li><strong>Kursutvikling</strong> – skreddersydde e-læringskurs<br>20 000–60 000 kr</li>
+      </ul>
+      <div class="service-actions">
+        <a class="btn" href="{% url 'contact' %}?service=IKT-veiledning%20og%20opplæring">Contact about this service</a>
+      </div>
+    </article>
+
+    <article class="card service-card reveal">
+      <span class="eyebrow">Pakke E</span>
+      <h2>Saksbehandling og dokumentstøtte</h2>
+      <ul class="service-list">
+        <li><strong>Tekstforfatter/saksbehandler</strong> – søknader, rapporter, maler<br>700–900 kr/t</li>
+        <li><strong>Innholdsproduksjon</strong> – norsk/engelsk tekst, oversettelse<br>600–800 kr/t</li>
+      </ul>
+      <div class="service-actions">
+        <a class="btn" href="{% url 'contact' %}?service=Saksbehandling%20og%20dokumentstøtte">Contact about this service</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+{% if services %}
+<section class="container extra-services">
+  <div class="section-header">
+    <div>
+      <span class="eyebrow">Andre tjenester</span>
+      <h2>Tilpassede løsninger</h2>
+      <p>Ingenting slår personlig rådgivning. Her er flere av tjenestene jeg kan tilby ved behov.</p>
+    </div>
+  </div>
+  {% for service in services %}
+    <article class="card reveal">
+      <h3>{{ service.title }}</h3>
+      <p>{{ service.summary }}</p>
+    </article>
+  {% endfor %}
+</section>
+{% endif %}
 {% endblock %}
