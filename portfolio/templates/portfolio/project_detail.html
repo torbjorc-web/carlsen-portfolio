@@ -1,9 +1,64 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-  <h1>{{ project.title }}</h1>
-  <p>Testing...</p>
-  <a href="{% url 'portfolio' %}">Back to Projects</a>
+  <article class="project-detail">
+    <header>
+      <h1>{{ project.title }}</h1>
+      <p class="project-description">{{ project.short_description }}</p>
+    </header>
+
+    <div class="project-meta">
+      {% if project.github_url %}
+        <a href="{{ project.github_url }}" class="btn btn-small" target="_blank" rel="noreferrer">GitHub Repository</a>
+      {% endif %}
+      {% if project.demo_url %}
+        <a href="{{ project.demo_url }}" class="btn btn-small" target="_blank" rel="noreferrer">Live Demo</a>
+      {% endif %}
+    </div>
+
+    {% if project.technologies.all %}
+      <section>
+        <h3>Technologies</h3>
+        <div class="tech-tags">
+          {% for tech in project.technologies.all %}
+            <span class="tech-tag">{{ tech.name }}</span>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+
+    {% if project.problem %}
+      <section>
+        <h2>The Problem</h2>
+        <p>{{ project.problem }}</p>
+      </section>
+    {% endif %}
+
+    {% if project.solution %}
+      <section>
+        <h2>The Solution</h2>
+        <p>{{ project.solution }}</p>
+      </section>
+    {% endif %}
+
+    {% if project.outcome %}
+      <section>
+        <h2>Outcome</h2>
+        <p>{{ project.outcome }}</p>
+      </section>
+    {% endif %}
+
+    {% if project.lessons_learned %}
+      <section>
+        <h2>Lessons Learned</h2>
+        <p>{{ project.lessons_learned }}</p>
+      </section>
+    {% endif %}
+
+    <footer class="project-actions">
+      <a href="{% url 'portfolio' %}" class="text-btn">← Back to Projects</a>
+    </footer>
+  </article>
 </div>
 {% endblock %}
 
